@@ -47,21 +47,14 @@ function restartNetwork() {
 	echo
 }
 
-function installNodeModules() {
-	echo
-	if [ -d node_modules ]; then
-		echo "============== node modules installed already ============="
-	else
-		echo "============== Installing node modules ============="
-		npm install
-	fi
-	echo
+function registerUsers() {	
+	cd fabcar
+	echo $PWD
+	rm -rf hfc-key-store
+	node users.js
 }
 
 
 restartNetwork
+registerUsers
 
-
-#installNodeModules
-
-#PORT=4000 node app

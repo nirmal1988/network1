@@ -15,15 +15,16 @@ services:
       - FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-ca-server-config/6fff3dd298c02d530b54de571e1b34dcd354c86f8c21de88956385673c4523c0_sk
       #- FABRIC_CA_SERVER_CA_CERTFILE=/etc/hyperledger/fabric-tlsca-server-config/tlsca.org1.example.com-cert.pem
       #- FABRIC_CA_SERVER_CA_KEYFILE=/etc/hyperledger/fabric-tlsca-server-config/94758aa1f9c2abdc36feca8f40f77f00a3e1c95d6a6e457cf70d815e6d75c6fb_sk
-      #- FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_CA_NAME=ca.org1.example.com
+      #- FABRIC_CA_SERVER_TLS_ENABLED=true      
       # - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-tlsca-server-config/tlsca.org1.example.com-cert.pem
       # - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-tlsca-server-config/94758aa1f9c2abdc36feca8f40f77f00a3e1c95d6a6e457cf70d815e6d75c6fb_sk
     ports:
       - "7054:7054"
     #command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org1.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/6fff3dd298c02d530b54de571e1b34dcd354c86f8c21de88956385673c4523c0_sk -b admin:adminpw' -d
-    command: sh -c 'fabric-ca-server start -b farmersadmin:adminpw -d'    
+    command: sh -c 'fabric-ca-server start -c /etc/hyperledger/fabric-ca-server/ca1-config.yaml -d'    
     volumes:
+      - ./fabric-ca-server/ca1:/etc/hyperledger/fabric-ca-server
       - ./crypto-config/peerOrganizations/org1.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
       - ./crypto-config/peerOrganizations/org1.example.com/tlsca/:/etc/hyperledger/fabric-tlsca-server-config
     container_name: ca.org1.example.com
@@ -41,8 +42,9 @@ services:
     ports:
       - "8054:7054"
     #command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org2.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/0e92f45b8d4eb59cad258600f7cc74fc750d65b0d1ce7fe6b944f18012db798f_sk -b admin:adminpw' -d
-    command: sh -c 'fabric-ca-server start -b logisticsadmin:adminpw -d'
+    command: sh -c 'fabric-ca-server start -c /etc/hyperledger/fabric-ca-server/ca2-config.yaml -d'
     volumes:
+      - ./fabric-ca-server/ca2:/etc/hyperledger/fabric-ca-server
       - ./crypto-config/peerOrganizations/org2.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
       - ./crypto-config/peerOrganizations/org2.example.com/tlsca/:/etc/hyperledger/fabric-tlsca-server-config
     container_name: ca.org2.example.com
@@ -60,8 +62,9 @@ services:
     ports:
       - "9054:7054"
     #command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org3.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/36ea237b4dec78da80f50ec7f9e0d5b93e7c91d807161fe389802643d4304ad1_sk -b admin:adminpw' -d
-    command: sh -c 'fabric-ca-server start -b processorsadmin:adminpw -d'
+    command: sh -c 'fabric-ca-server start -c /etc/hyperledger/fabric-ca-server/ca3-config.yaml -d'
     volumes:
+      - ./fabric-ca-server/ca3:/etc/hyperledger/fabric-ca-server
       - ./crypto-config/peerOrganizations/org3.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
       - ./crypto-config/peerOrganizations/org3.example.com/tlsca/:/etc/hyperledger/fabric-tlsca-server-config
     container_name: ca.org3.example.com
@@ -79,8 +82,9 @@ services:
     ports:
       - "10054:7054"
     #command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.org4.example.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/9df800580c079a601ea1fba1448fc50efceeada90c5b81bd5071d6218e16a3ce_sk -b admin:adminpw' -d
-    command: sh -c 'fabric-ca-server start -b ikeasadmin:adminpw -d'
+    command: sh -c 'fabric-ca-server start -c /etc/hyperledger/fabric-ca-server/ca4-config.yaml -d'
     volumes:
+      - ./fabric-ca-server/ca4:/etc/hyperledger/fabric-ca-server
       - ./crypto-config/peerOrganizations/org4.example.com/ca/:/etc/hyperledger/fabric-ca-server-config
       - ./crypto-config/peerOrganizations/org4.example.com/tlsca/:/etc/hyperledger/fabric-tlsca-server-config
     container_name: ca.org4.example.com
